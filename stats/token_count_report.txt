@@ -1,0 +1,42 @@
+wiki and prose:
+  data/dolma1_7-wiki-en: 1,963,908,151 tokens
+  -> subtotal: 1,963,908,151 tokens (2.0B)
+
+math and science:
+  data/finemath-3plus: 116,142,023,573 tokens
+  data/common_crawl-science_math_and_technology-0012: 10,337,536,672 tokens
+  data/common_crawl-science_math_and_technology-0013: 22,185,344,237 tokens
+  -> subtotal: 148,664,904,482 tokens (148.7B)
+
+software and programming:
+  data/common_crawl-software-0011: 107,990,214 tokens
+  data/common_crawl-software-0012: 438,771,221 tokens
+  data/common_crawl-software_development-0012: 10,957,351,538 tokens
+  data/common_crawl-software_development-0013: 18,935,994,953 tokens
+  data/stack_edu-Python: 27,298,183,363 tokens
+  data/stack_edu-Markdown: 43,280,033,886 tokens
+  data/stack_edu-Shell: 5,145,514,916 tokens
+  data/stack_edu-SQL: 6,565,273,877 tokens
+  -> subtotal: 112,729,113,968 tokens (112.7B)
+
+industrial and engineering:
+  data/common_crawl-electronics_and_hardware-0012: 113,555,970 tokens
+  data/common_crawl-electronics_and_hardware-0013: 118,043,705 tokens
+  data/common_crawl-industrial-0015: 141,386,362 tokens
+  data/common_crawl-industrial-0016: 528,016,379 tokens
+  data/common_crawl-transportation-0016: 276,923,862 tokens
+  data/common_crawl-transportation-0017: 1,318,467,346 tokens
+  -> subtotal: 2,496,393,624 tokens (2.5B)
+
+casual and lifestyle:
+  data/common_crawl-home_and_hobbies-0017: 839,207,892 tokens
+  data/common_crawl-home_and_hobbies-0018: 6,280,897,260 tokens
+  data/common_crawl-home_and_hobbies-0019: 28,066,356,188 tokens
+  data/common_crawl-food_and_dining-0015: 128,262,734 tokens
+  data/common_crawl-food_and_dining-0016: 501,490,008 tokens
+  data/common_crawl-travel_and_tourism-0017: 431,637,748 tokens
+  data/common_crawl-travel_and_tourism-0018: 1,945,991,175 tokens
+  data/common_crawl-travel_and_tourism-0019: 6,498,702,102 tokens
+  -> subtotal: 44,692,545,107 tokens (44.7B)
+
+TOTAL: 310,546,865,332 tokens (310.5B)

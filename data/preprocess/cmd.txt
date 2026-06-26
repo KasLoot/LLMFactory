@@ -1,0 +1,68 @@
+# wiki and prose
+data/dolma1_7-wiki-en
+
+# math and science
+finemath-3plus
+data/common_crawl-science_math_and_technology-0012
+data/common_crawl-science_math_and_technology-0013
+
+# software and programming
+data/common_crawl-software-0011
+data/common_crawl-software-0012
+data/common_crawl-software_development-0012
+data/common_crawl-software_development-0013
+stack_edu-Python
+stack_edu-Markdown
+stack_edu-Shell
+stack_edu-SQL
+
+# industrial and engineering
+data/common_crawl-electronics_and_hardware-0012
+data/common_crawl-electronics_and_hardware-0013
+data/common_crawl-industrial-0015
+data/common_crawl-industrial-0016
+data/common_crawl-transportation-0016
+data/common_crawl-transportation-0017
+
+# casual and lifestyle
+data/common_crawl-home_and_hobbies-0017
+data/common_crawl-home_and_hobbies-0018
+data/common_crawl-home_and_hobbies-0019
+data/common_crawl-food_and_dining-0015
+data/common_crawl-food_and_dining-0016
+data/common_crawl-travel_and_tourism-0017
+data/common_crawl-travel_and_tourism-0018
+data/common_crawl-travel_and_tourism-0019
+
+
+
+hf download allenai/dolma3_mix-6T \
+  --repo-type dataset \
+  --include "README.md" \
+  --include "data/dolma1_7-wiki-en/**" \
+  --include "data/finemath-3plus/**" \
+  --include "data/common_crawl-science_math_and_technology-0012/**" \
+  --include "data/common_crawl-science_math_and_technology-0013/**" \
+  --include "data/common_crawl-software-0011/**" \
+  --include "data/common_crawl-software-0012/**" \
+  --include "data/common_crawl-software_development-0012/**" \
+  --include "data/common_crawl-software_development-0013/**" \
+  --include "data/stack_edu-Python/**" \
+  --include "data/stack_edu-Markdown/**" \
+  --include "data/stack_edu-Shell/**" \
+  --include "data/stack_edu-SQL/**" \
+  --include "data/common_crawl-electronics_and_hardware-0012/**" \
+  --include "data/common_crawl-electronics_and_hardware-0013/**" \
+  --include "data/common_crawl-industrial-0015/**" \
+  --include "data/common_crawl-industrial-0016/**" \
+  --include "data/common_crawl-transportation-0016/**" \
+  --include "data/common_crawl-transportation-0017/**" \
+  --include "data/common_crawl-home_and_hobbies-0017/**" \
+  --include "data/common_crawl-home_and_hobbies-0018/**" \
+  --include "data/common_crawl-home_and_hobbies-0019/**" \
+  --include "data/common_crawl-food_and_dining-0015/**" \
+  --include "data/common_crawl-food_and_dining-0016/**" \
+  --include "data/common_crawl-travel_and_tourism-0017/**" \
+  --include "data/common_crawl-travel_and_tourism-0018/**" \
+  --include "data/common_crawl-travel_and_tourism-0019/**" \
+  --local-dir /data/datasets/dolma3_mix-6T
