@@ -1,0 +1,39 @@
+export HF_TOKEN=
+
+hf download allenai/dolma3_mix-6T \
+  --repo-type dataset \
+  --include "README.md" \
+  --include "data/dolma1_7-wiki-en/**" \
+  --include "data/finemath-3plus/**" \
+  --include "data/common_crawl-science_math_and_technology-0012/**" \
+  --include "data/common_crawl-science_math_and_technology-0013/**" \
+  --include "data/common_crawl-software-0011/**" \
+  --include "data/common_crawl-software-0012/**" \
+  --include "data/common_crawl-software_development-0012/**" \
+  --include "data/common_crawl-software_development-0013/**" \
+  --include "data/stack_edu-Python/**" \
+  --include "data/stack_edu-Markdown/**" \
+  --include "data/stack_edu-Shell/**" \
+  --include "data/stack_edu-SQL/**" \
+  --include "data/common_crawl-electronics_and_hardware-0012/**" \
+  --include "data/common_crawl-electronics_and_hardware-0013/**" \
+  --include "data/common_crawl-industrial-0015/**" \
+  --include "data/common_crawl-industrial-0016/**" \
+  --include "data/common_crawl-transportation-0016/**" \
+  --include "data/common_crawl-transportation-0017/**" \
+  --include "data/common_crawl-home_and_hobbies-0017/**" \
+  --include "data/common_crawl-home_and_hobbies-0018/**" \
+  --include "data/common_crawl-home_and_hobbies-0019/**" \
+  --include "data/common_crawl-food_and_dining-0015/**" \
+  --include "data/common_crawl-food_and_dining-0016/**" \
+  --include "data/common_crawl-travel_and_tourism-0017/**" \
+  --include "data/common_crawl-travel_and_tourism-0018/**" \
+  --include "data/common_crawl-travel_and_tourism-0019/**" \
+  --local-dir /workspace/data/datasets/dolma3_mix-6T
+
+
+python data/preprocess/raw2tokens.py --data-root /workspace/data/datasets/dolma3_mix-6T/data --output-root /workspace/data/datasets/llmfactory_pretrain_v0 --tokenizer-path /workspace/LLMFactory/tokenizer/LFM2_5_VL --context-length 2048 --target-config configs/pretrain_20b_mix.json --overwrite
+
+
+
+torchrun --nproc_per_node=2 train.py --config b200

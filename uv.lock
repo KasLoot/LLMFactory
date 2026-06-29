@@ -778,7 +778,7 @@ requires-dist = [
     { name = "torchinfo", specifier = ">=1.8.0" },
     { name = "torchvision", specifier = ">=0.27.1" },
     { name = "transformers", specifier = ">=5.12.1" },
-    { name = "wandb", specifier = ">=0.17.0" },
+    { name = "wandb", specifier = ">=0.28.0" },
     { name = "zstandard", specifier = ">=0.25.0" },
 ]
 
