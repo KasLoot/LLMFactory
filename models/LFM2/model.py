@@ -275,6 +275,13 @@ class LFM2(nn.Module):
         return torch.ones(seq_len, seq_len, dtype=torch.bool, device=device).tril()
 
 
+    @torch.no_grad()
+    def warmup_caches(self, seq_len: int, device: torch.device, dtype: torch.dtype):
+        for layer in self.transformer:
+            if layer.sequence_block == "gqa":
+                layer.sq_block.rotary(seq_len, device, dtype)
+
+
     def forward(self, x: torch.Tensor):
         x = self.embedding(x)
         mask = self._make_causal_mask(x.size(1), x.device)

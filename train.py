@@ -41,6 +41,8 @@ class TrainingConfig:
     max_eval_steps: int | None = None
     resume_from: str | None = None
     peak_bf16_tflops_per_gpu: float | None = None
+    compile_model: bool = True
+    compile_mode: str = "default"
     wandb_enabled: bool = True
     wandb_project: str = "llmfactory"
     wandb_run_name: str | None = None
@@ -127,6 +129,8 @@ def parse_args():
     parser.add_argument("--resume", nargs="?", const="latest")
     parser.add_argument("--activation-checkpointing", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--peak-bf16-tflops", type=float)
+    parser.add_argument("--compile", action="store_true")
+    parser.add_argument("--compile-mode", default=None)
     parser.add_argument("--wandb-project", type=str)
     parser.add_argument("--wandb-run-name", type=str)
     parser.add_argument("--disable-wandb", action="store_true")
@@ -151,6 +155,7 @@ def build_config(args) -> TrainingConfig:
         "max_eval_steps": args.max_eval_steps,
         "resume_from": args.resume,
         "peak_bf16_tflops_per_gpu": args.peak_bf16_tflops,
+        "compile_mode": args.compile_mode,
         "wandb_project": args.wandb_project,
         "wandb_run_name": args.wandb_run_name,
     }
@@ -161,6 +166,8 @@ def build_config(args) -> TrainingConfig:
         config.wandb_enabled = False
     if args.activation_checkpointing is not None:
         config.activation_checkpointing = args.activation_checkpointing
+    if args.compile:
+        config.compile_model = True
     return config
 
 
@@ -189,7 +196,7 @@ def resolve_resume_path(config: TrainingConfig, latest_checkpoint_path: Path) ->
 
 def load_checkpoint(path: Path, model, optimizer, scheduler, device):
     checkpoint = torch.load(path, map_location=device)
-    unwrapped_model = model.module if isinstance(model, DDP) else model
+    unwrapped_model = unwrap_model(model)
     unwrapped_model.load_state_dict(checkpoint["model"])
     optimizer.load_state_dict(checkpoint["optimizer"])
     if scheduler is not None and checkpoint.get("scheduler") is not None:
@@ -237,6 +244,7 @@ def evaluate(model, val_loader, loss_fn, device, config: TrainingConfig):
         input_ids = batch["input_ids"].to(device, non_blocking=True)
         labels = batch["labels"].to(device, non_blocking=True)
 
+        compile_step_begin(config)
         with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
             logits = model(input_ids)
             loss = loss_fn(logits.float().transpose(1, 2), labels)
@@ -265,7 +273,7 @@ def save_checkpoint(
     best_val_loss: float,
 ):
     path.parent.mkdir(parents=True, exist_ok=True)
-    unwrapped_model = model.module if isinstance(model, DDP) else model
+    unwrapped_model = unwrap_model(model)
     torch.save(
         {
             "model": unwrapped_model.state_dict(),
@@ -285,6 +293,17 @@ def save_checkpoint(
 def log_metrics(wandb_run, metrics: dict[str, float], step: int):
     if wandb_run is not None:
         wandb_run.log(metrics, step=step)
+
+
+def unwrap_model(model):
+    if isinstance(model, DDP):
+        model = model.module
+    return getattr(model, "_orig_mod", model)
+
+
+def compile_step_begin(config: TrainingConfig):
+    if config.compile_model and hasattr(torch.compiler, "cudagraph_mark_step_begin"):
+        torch.compiler.cudagraph_mark_step_begin()
 
 
 def estimate_mfu(tokens_per_second: float, num_parameters: int, world_size: int, peak_bf16_tflops_per_gpu: float | None):
@@ -307,6 +326,11 @@ def main():
     model = LFM2(LFM2_5_350M_Config())
     model.set_gradient_checkpointing(config.activation_checkpointing)
     model.to(device)
+
+    if config.compile_model:
+        print(f"Compiling model with mode {config.compile_mode}...")
+        model.warmup_caches(config.context_length, device, torch.bfloat16)
+        model = torch.compile(model, mode=config.compile_mode)
 
     model = DDP(model, device_ids=[local_rank])
     num_parameters = sum(p.numel() for p in model.parameters())
@@ -400,6 +424,7 @@ def main():
         print(f"Tokens per optimizer step: {tokens_per_optimizer_step:,}")
         print(f"Total planned optimizer steps: {total_training_steps:,}")
         print(f"Activation checkpointing: {config.activation_checkpointing}")
+        print(f"torch.compile: {config.compile_model} ({config.compile_mode})")
 
     try:
         optimizer.zero_grad(set_to_none=True)
@@ -426,6 +451,7 @@ def main():
                     or micro_step + 1 == len(train_loader)
                 )
 
+                compile_step_begin(config)
                 with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
                     logits = model(input_ids)
                     loss = loss_fn(logits.float().transpose(1, 2), labels)
