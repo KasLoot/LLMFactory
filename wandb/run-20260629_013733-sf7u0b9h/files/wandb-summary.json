@@ -1,1 +1,0 @@
-{"train/grad_norm_before_clip":1.845551609992981,"_timestamp":1.7826935489593515e+09,"throughput/achieved_tflops":22.957513105599585,"train/learning_rate":0.0001503,"_step":500,"throughput/tokens_per_second":10827.794404078488,"train/loss":7.11685848236084,"epoch":1,"train/tokens_seen":1024000,"train/perplexity":1232.5721975817416,"_wandb":{"runtime":95},"_runtime":95.966080128}
