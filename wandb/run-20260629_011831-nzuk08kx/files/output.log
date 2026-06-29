@@ -1,0 +1,25 @@
+Using training config: local
+Tokens per optimizer step: 2,048
+epoch 1 step 10 loss 9.3359 ppl 11337.59 grad_norm 10.2391
+epoch 1 step 20 loss 7.3455 ppl 1549.18 grad_norm 6.7891
+epoch 1 step 30 loss 6.4372 ppl 624.68 grad_norm 4.9670
+epoch 1 step 40 loss 5.3729 ppl 215.48 grad_norm 4.9308
+epoch 1 step 50 loss 3.9839 ppl 53.72 grad_norm 3.9196
+epoch 1 step 60 loss 3.8247 ppl 45.82 grad_norm 4.2415
+epoch 1 step 70 loss 3.6528 ppl 38.58 grad_norm 3.2072
+epoch 1 step 80 loss 3.5533 ppl 34.93 grad_norm 4.8126
+epoch 1 step 90 loss 2.6909 ppl 14.74 grad_norm 3.6360
+epoch 1 step 100 loss 2.7708 ppl 15.97 grad_norm 2.7358
+epoch 1 step 110 loss 3.5617 ppl 35.22 grad_norm 16.0928
+epoch 1 step 120 loss 3.0283 ppl 20.66 grad_norm 3.6690
+epoch 1 step 130 loss 6.2496 ppl 517.82 grad_norm 250.7905
+epoch 1 step 140 loss 3.1430 ppl 23.17 grad_norm 3.6725
+epoch 1 step 150 loss 1.9973 ppl 7.37 grad_norm 4.4240
+epoch 1 step 160 loss 1.8597 ppl 6.42 grad_norm 2.4608
+epoch 1 step 170 loss 1.8113 ppl 6.12 grad_norm 5.2333
+epoch 1 step 180 loss 1.2608 ppl 3.53 grad_norm 2.0219
+epoch 1 step 190 loss 0.9435 ppl 2.57 grad_norm 1.3134
+epoch 1 step 200 loss 1.3304 ppl 3.78 grad_norm 2.0206
+epoch 1 step 210 loss 2.3962 ppl 10.98 grad_norm 4.4111
+epoch 1 step 220 loss 1.1040 ppl 3.02 grad_norm 1.4091
+epoch 1 step 230 loss 2.0300 ppl 7.61 grad_norm 242.2712

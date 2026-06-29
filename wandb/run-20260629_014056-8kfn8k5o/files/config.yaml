@@ -1,0 +1,113 @@
+_wandb:
+    value:
+        cli_version: 0.28.0
+        e:
+            bb4qunxrczjy62eir2mkpmeuau42rgme:
+                args:
+                    - --config
+                    - local
+                codePath: train.py
+                codePathLocal: train.py
+                cpu_count: 24
+                cpu_count_logical: 24
+                cudaVersion: "13.2"
+                disk:
+                    /:
+                        total: "3935709487104"
+                        used: "546855542784"
+                email: steven.liu.yuxin@outlook.com
+                executable: /home/yuxin/workspace/LLMFactory/.venv/bin/python
+                git:
+                    commit: 2fb61493a25e41e94bfdb35b753036aaf9859c92
+                    remote: git@github.com:KasLoot/LLMFactory.git
+                gpu: NVIDIA GeForce RTX 5090
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Blackwell
+                      cudaCores: 21760
+                      memoryTotal: "34190917632"
+                      name: NVIDIA GeForce RTX 5090
+                      uuid: GPU-3ef00252-c554-1382-1183-e4eb1f96a623
+                host: yuxin-DT-UCL-OPS
+                memory:
+                    total: "66648944640"
+                os: Linux-6.17.0-35-generic-x86_64-with-glibc2.39
+                program: /home/yuxin/workspace/LLMFactory/train.py
+                python: CPython 3.10.20
+                root: /home/yuxin/workspace/LLMFactory
+                startedAt: "2026-06-29T00:40:56.009998Z"
+                writerId: bb4qunxrczjy62eir2mkpmeuau42rgme
+        m: []
+        python_version: 3.10.20
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 2
+                - 13
+                - 16
+                - 61
+            "4": 3.10.20
+            "5": 0.28.0
+            "12": 0.28.0
+            "13": linux-x86_64
+activation_checkpointing:
+    value: false
+betas:
+    value:
+        - 0.9
+        - 0.95
+checkpoint_dir:
+    value: ./checkpoints/LFM2_5
+context_length:
+    value: 2048
+epochs:
+    value: 1
+eval_interval:
+    value: 10000
+grad_clip_norm:
+    value: 1
+gradient_accumulation_steps:
+    value: 1
+learning_rate:
+    value: 0.0003
+log_interval:
+    value: 10
+manifest_path:
+    value: /home/yuxin/workspace/data/datasets/llmfactory_pretrain_v0/manifest.json
+max_eval_steps:
+    value: null
+max_steps:
+    value: null
+min_learning_rate:
+    value: 3e-05
+name:
+    value: local
+num_workers:
+    value: 4
+peak_bf16_tflops_per_gpu:
+    value: null
+pin_memory:
+    value: true
+resume_from:
+    value: null
+seed:
+    value: 42
+train_batch_size:
+    value: 1
+val_batch_size:
+    value: 1
+wandb_enabled:
+    value: true
+wandb_project:
+    value: llmfactory
+wandb_run_name:
+    value: null
+warmup_steps:
+    value: 1000
+weight_decay:
+    value: 0.1
+world_size:
+    value: 1

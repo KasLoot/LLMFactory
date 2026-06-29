@@ -66,3 +66,20 @@ hf download allenai/dolma3_mix-6T \
   --include "data/common_crawl-travel_and_tourism-0018/**" \
   --include "data/common_crawl-travel_and_tourism-0019/**" \
   --local-dir /data/datasets/dolma3_mix-6T
+
+
+
+
+.venv/bin/python data/preprocess/raw2tokens.py \
+  --data-root /data/datasets/dolma3_mix-6T/data \
+  --tokenizer-path tokenizer/LFM2_5_VL \
+  --output-root /data/datasets/llmfactory_pretrain_v0 \
+  --target-config configs/pretrain_20b_mix.json \
+  --context-length 2048 \
+  --train-shard-tokens 100000000 \
+  --val-shard-tokens 20000000 \
+  --val-fraction 0.002 \
+  --seed 42 \
+  --min-doc-tokens 32 \
+  --max-doc-tokens 65536 \
+  --dtype auto

@@ -1,0 +1,31 @@
+{
+  "total_target_tokens": 20000000000,
+  "subsets": {
+    "dolma1_7-wiki-en": 1900000000,
+    "finemath-3plus": 2000000000,
+    "common_crawl-science_math_and_technology-0012": 1100000000,
+    "common_crawl-science_math_and_technology-0013": 2000000000,
+    "common_crawl-software-0011": 100000000,
+    "common_crawl-software-0012": 400000000,
+    "common_crawl-software_development-0012": 1100000000,
+    "common_crawl-software_development-0013": 1200000000,
+    "stack_edu-Python": 1300000000,
+    "stack_edu-Markdown": 900000000,
+    "stack_edu-Shell": 500000000,
+    "stack_edu-SQL": 500000000,
+    "common_crawl-electronics_and_hardware-0012": 113555970,
+    "common_crawl-electronics_and_hardware-0013": 118043705,
+    "common_crawl-industrial-0015": 141386362,
+    "common_crawl-industrial-0016": 528016379,
+    "common_crawl-transportation-0016": 276923862,
+    "common_crawl-transportation-0017": 822073722,
+    "common_crawl-home_and_hobbies-0017": 250000000,
+    "common_crawl-home_and_hobbies-0018": 800000000,
+    "common_crawl-home_and_hobbies-0019": 1400000000,
+    "common_crawl-food_and_dining-0015": 128262734,
+    "common_crawl-food_and_dining-0016": 501490008,
+    "common_crawl-travel_and_tourism-0017": 250000000,
+    "common_crawl-travel_and_tourism-0018": 600000000,
+    "common_crawl-travel_and_tourism-0019": 1070247258
+  }
+}

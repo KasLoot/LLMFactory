@@ -1,0 +1,1 @@
+{"train/grad_norm_before_clip":242.2711944580078,"_timestamp":1.782692355746047e+09,"_step":230,"_runtime":44.009469607,"train/tokens_seen":471040,"epoch":1,"train/perplexity":7.614402016581403,"train/learning_rate":0.0003,"train/loss":2.030041456222534,"_wandb":{"runtime":44}}

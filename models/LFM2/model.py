@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
+from torch.utils.checkpoint import checkpoint
 
 
 class LFM2_5_350M_Config:
@@ -130,7 +131,11 @@ class GQA(nn.Module):
         score = q @ k.transpose(-2, -1) / (self.d_head ** 0.5)
 
         if mask is not None:
-            score = score.masked_fill(mask.unsqueeze(1) == 0, float('-inf'))
+            if mask.dim() == 2:
+                mask = mask.unsqueeze(0).unsqueeze(0)
+            elif mask.dim() == 3:
+                mask = mask.unsqueeze(1)
+            score = score.masked_fill(~mask, torch.finfo(score.dtype).min)
 
         attn = F.softmax(score, dim=-1)
         attn = self.dropout(attn)
@@ -152,22 +157,23 @@ class GQA(nn.Module):
 
         output = output.transpose(1, 2).contiguous().view(batch_size, seq_len, self.d_q)
         output = self.fc(output)
-        output = output + x_q  # Residual connection and normalization
         return output
     
 
 class GSConv(nn.Module):
     def __init__(self, d_model, conv_k):
         super().__init__()
+        self.conv_k = conv_k
         self.wbch = nn.Linear(d_model, 3*d_model)
-        self.conv = nn.Conv1d(d_model, d_model, conv_k, bias=False, groups=d_model, padding="same")
+        self.conv = nn.Conv1d(d_model, d_model, conv_k, bias=False, groups=d_model)
         self.out_proj = nn.Linear(d_model, d_model)
 
     def forward(self, x: torch.Tensor):
-        b, c, h = self.wbch(x).chunk(3, dim=-1)
-        y = b*h
-        z = self.conv(y.transpose(-1, -2)).transpose(-1, -2).contiguous()
-        out = x +self.out_proj(c*z)
+        gate, channel, hidden = self.wbch(x).chunk(3, dim=-1)
+        y = gate * hidden
+        y = F.pad(y.transpose(-1, -2), (self.conv_k - 1, 0))
+        z = self.conv(y).transpose(-1, -2).contiguous()
+        out = self.out_proj(channel * z)
 
         return out
 
@@ -200,17 +206,19 @@ class TransformerBlock(nn.Module):
         else:
             raise ValueError(f"Unsupported sequence_block: {sequence_block}")
         
-        self.rms = nn.RMSNorm(d_model)
+        self.sequence_norm = nn.RMSNorm(d_model)
+        self.ffn_norm = nn.RMSNorm(d_model)
 
         self.ffn = SwiGLU(d_model=d_model, d_ff=d_ff)
 
     
     def forward(self, x: torch.Tensor, mask: torch.Tensor = None):
+        sequence_input = self.sequence_norm(x)
         if self.sequence_block == "conv":
-            x = self.sq_block(x)
+            x = x + self.sq_block(sequence_input)
         elif self.sequence_block == "gqa":
-            x = self.sq_block(x_q=x, x_k=x, x_v=x, mask=mask)
-        x = x + self.ffn(self.rms(x))
+            x = x + self.sq_block(x_q=sequence_input, x_k=sequence_input, x_v=sequence_input, mask=mask)
+        x = x + self.ffn(self.ffn_norm(x))
 
         return x
 
@@ -236,20 +244,45 @@ class LFM2(nn.Module):
         self.dr = config.dr
         self.rope_base = config.rope_base
 
-        self.embedding = nn.Embedding(self.vocab_size, self.d_model, dtype=torch.bfloat16)
+        self.embedding = nn.Embedding(self.vocab_size, self.d_model)
         self.transformer = nn.ModuleList([
             TransformerBlock(sequence_block=sequence_block, d_model=self.d_model, d_ff=self.d_ff, d_head=self.d_head, q_head=self.q_head, kv_head=self.kv_head, conv_k=self.conv_k, dr=self.dr, rope_base=self.rope_base)
             for sequence_block in self.layers
         ])
         self.post_norm = nn.RMSNorm(self.d_model)
         self.out = nn.Linear(self.d_model, self.vocab_size, bias=False)
+
+        self.apply(self._init_weights)
         self.out.weight = self.embedding.weight
+        self.gradient_checkpointing = False
 
     
+    # initialize transformer weights with a small std
+    def _init_weights(self, module):
+        if isinstance(module, nn.Linear):
+            torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
+            if module.bias is not None:
+                torch.nn.init.zeros_(module.bias)
+        elif isinstance(module, nn.Embedding):
+            torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
+
+
+    def set_gradient_checkpointing(self, enabled: bool = True):
+        self.gradient_checkpointing = enabled
+
+
+    def _make_causal_mask(self, seq_len: int, device: torch.device):
+        return torch.ones(seq_len, seq_len, dtype=torch.bool, device=device).tril()
+
+
     def forward(self, x: torch.Tensor):
         x = self.embedding(x)
+        mask = self._make_causal_mask(x.size(1), x.device)
         for layer in self.transformer:
-            x = layer(x)
+            if self.gradient_checkpointing and self.training:
+                x = checkpoint(layer, x, mask, use_reentrant=False)
+            else:
+                x = layer(x, mask)
         x = self.out(self.post_norm(x))
         return x
 
@@ -276,4 +309,4 @@ if __name__ == "__main__":
         print(f"Model Param Count: {sum(p.numel() for p in model.parameters())}")
 
         model_out = model(x)
-        print(f"Bainer_MoE model output shape: {model_out.shape}")
+        print(f"LFM2 model output shape: {model_out.shape}")

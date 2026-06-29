@@ -1,0 +1,24 @@
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_setup.py:_flush():81] Current SDK version is 0.28.0
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_setup.py:_flush():81] Configure stats pid to 61077
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_init.py:setup_run_log_directory():725] Logging user logs to /home/yuxin/workspace/LLMFactory/wandb/run-20260629_014056-8kfn8k5o/logs/debug.log
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_init.py:setup_run_log_directory():726] Logging internal logs to /home/yuxin/workspace/LLMFactory/wandb/run-20260629_014056-8kfn8k5o/logs/debug-internal.log
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_init.py:init():768] calling init triggers
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_init.py:init():773] wandb.init called with sweep_config: {}
+config: {'name': 'local', 'manifest_path': '/home/yuxin/workspace/data/datasets/llmfactory_pretrain_v0/manifest.json', 'checkpoint_dir': './checkpoints/LFM2_5', 'context_length': 2048, 'epochs': 1, 'train_batch_size': 1, 'val_batch_size': 1, 'gradient_accumulation_steps': 1, 'learning_rate': 0.0003, 'min_learning_rate': 3e-05, 'warmup_steps': 1000, 'betas': (0.9, 0.95), 'weight_decay': 0.1, 'grad_clip_norm': 1.0, 'activation_checkpointing': False, 'num_workers': 4, 'pin_memory': True, 'eval_interval': 10000, 'log_interval': 10, 'max_steps': None, 'max_eval_steps': None, 'resume_from': None, 'peak_bf16_tflops_per_gpu': None, 'wandb_enabled': True, 'wandb_project': 'llmfactory', 'wandb_run_name': None, 'seed': 42, 'world_size': 1, '_wandb': {}}
+2026-06-29 01:40:56,010 INFO    MainThread:61077 [wandb_init.py:init():816] starting backend
+2026-06-29 01:40:56,011 INFO    MainThread:61077 [wandb_init.py:init():831] sending inform_init request
+2026-06-29 01:40:56,239 INFO    MainThread:61077 [wandb_init.py:init():836] backend started and connected
+2026-06-29 01:40:56,248 INFO    MainThread:61077 [wandb_init.py:init():906] updated telemetry
+2026-06-29 01:40:56,251 INFO    MainThread:61077 [wandb_init.py:init():929] communicating run to backend with 90.0 second timeout
+2026-06-29 01:40:56,541 INFO    MainThread:61077 [wandb_init.py:init():974] starting run threads in backend
+2026-06-29 01:40:56,572 INFO    MainThread:61077 [wandb_run.py:_console_start():2523] atexit reg
+2026-06-29 01:40:56,572 INFO    MainThread:61077 [wandb_run.py:_redirect():2373] redirect: wrap_raw
+2026-06-29 01:40:56,572 INFO    MainThread:61077 [wandb_run.py:_redirect():2442] Wrapping output streams.
+2026-06-29 01:40:56,572 INFO    MainThread:61077 [wandb_run.py:_redirect():2465] Redirects installed.
+2026-06-29 01:40:56,573 INFO    MainThread:61077 [wandb_init.py:init():1012] run started, returning control to user process
+2026-06-29 01:44:30,443 INFO    MainThread:61077 [wandb_run.py:_finish():2285] finishing run kasloot-ai/llmfactory/8kfn8k5o
+2026-06-29 01:44:30,444 INFO    MainThread:61077 [wandb_run.py:_atexit_cleanup():2490] got exitcode: 0
+2026-06-29 01:44:30,445 INFO    MainThread:61077 [wandb_run.py:_restore():2472] restore
+2026-06-29 01:44:30,445 INFO    MainThread:61077 [wandb_run.py:_restore():2478] restore done
+2026-06-29 01:44:31,323 INFO    MainThread:61077 [wandb_run.py:_footer_sync_info():3895] logging synced files

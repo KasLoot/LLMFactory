@@ -1,0 +1,54 @@
+Using training config: local
+Tokens per optimizer step: 2,048
+Total planned optimizer steps: 9,746,182
+Activation checkpointing: False
+epoch 1 step 10 loss 11.2458 ppl 76558.58 grad_norm 12.4702 tok/s 7871
+epoch 1 step 20 loss 11.2594 ppl 77608.91 grad_norm 11.5472 tok/s 10828
+epoch 1 step 30 loss 11.2740 ppl 78749.32 grad_norm 10.8934 tok/s 10845
+epoch 1 step 40 loss 11.1913 ppl 72494.85 grad_norm 12.0533 tok/s 10847
+epoch 1 step 50 loss 11.1412 ppl 68953.90 grad_norm 11.0478 tok/s 10845
+epoch 1 step 60 loss 10.9824 ppl 58828.39 grad_norm 11.2628 tok/s 10840
+epoch 1 step 70 loss 10.5757 ppl 39170.56 grad_norm 11.0810 tok/s 10845
+epoch 1 step 80 loss 10.1439 ppl 25434.45 grad_norm 4.6546 tok/s 10845
+epoch 1 step 90 loss 9.3754 ppl 11795.20 grad_norm 2.8986 tok/s 10841
+epoch 1 step 100 loss 9.2569 ppl 10476.21 grad_norm 2.1590 tok/s 10842
+epoch 1 step 110 loss 9.9530 ppl 21015.76 grad_norm 6.1676 tok/s 10839
+epoch 1 step 120 loss 9.2193 ppl 10089.95 grad_norm 2.4545 tok/s 10839
+epoch 1 step 130 loss 9.9575 ppl 21109.58 grad_norm 3.3549 tok/s 10841
+epoch 1 step 140 loss 9.5828 ppl 14512.61 grad_norm 2.1051 tok/s 10836
+epoch 1 step 150 loss 8.6782 ppl 5873.72 grad_norm 2.5005 tok/s 10840
+epoch 1 step 160 loss 8.4209 ppl 4540.86 grad_norm 1.8448 tok/s 10835
+epoch 1 step 170 loss 8.4349 ppl 4604.98 grad_norm 4.3565 tok/s 10831
+epoch 1 step 180 loss 7.8177 ppl 2484.16 grad_norm 1.7690 tok/s 10837
+epoch 1 step 190 loss 7.7313 ppl 2278.50 grad_norm 1.8149 tok/s 10834
+epoch 1 step 200 loss 7.9986 ppl 2976.75 grad_norm 1.8245 tok/s 10835
+epoch 1 step 210 loss 9.0455 ppl 8480.50 grad_norm 2.7457 tok/s 10828
+epoch 1 step 220 loss 7.8126 ppl 2471.56 grad_norm 1.8970 tok/s 10834
+epoch 1 step 230 loss 8.2370 ppl 3778.36 grad_norm 5.4583 tok/s 10832
+epoch 1 step 240 loss 7.5960 ppl 1990.17 grad_norm 1.9280 tok/s 10829
+epoch 1 step 250 loss 7.7098 ppl 2230.04 grad_norm 2.7770 tok/s 10826
+epoch 1 step 260 loss 7.5132 ppl 1832.04 grad_norm 2.5981 tok/s 10832
+epoch 1 step 270 loss 7.4504 ppl 1720.61 grad_norm 4.3804 tok/s 10827
+epoch 1 step 280 loss 7.6407 ppl 2081.29 grad_norm 1.9962 tok/s 10827
+epoch 1 step 290 loss 7.6402 ppl 2080.14 grad_norm 2.2380 tok/s 10832
+epoch 1 step 300 loss 8.0811 ppl 3232.68 grad_norm 2.3683 tok/s 10830
+epoch 1 step 310 loss 7.4102 ppl 1652.71 grad_norm 2.2623 tok/s 10832
+epoch 1 step 320 loss 7.5730 ppl 1945.00 grad_norm 1.9428 tok/s 10827
+epoch 1 step 330 loss 7.1835 ppl 1317.52 grad_norm 2.4116 tok/s 10826
+epoch 1 step 340 loss 8.3411 ppl 4192.57 grad_norm 8.1037 tok/s 10828
+epoch 1 step 350 loss 7.4952 ppl 1799.47 grad_norm 2.2904 tok/s 10830
+epoch 1 step 360 loss 7.3652 ppl 1580.10 grad_norm 2.2789 tok/s 10830
+epoch 1 step 370 loss 7.1181 ppl 1234.11 grad_norm 2.1534 tok/s 10830
+epoch 1 step 380 loss 7.6154 ppl 2029.27 grad_norm 2.1666 tok/s 10827
+epoch 1 step 390 loss 7.3858 ppl 1612.95 grad_norm 2.1567 tok/s 10829
+epoch 1 step 400 loss 7.8356 ppl 2529.14 grad_norm 2.0375 tok/s 10830
+epoch 1 step 410 loss 7.3074 ppl 1491.31 grad_norm 1.9869 tok/s 10833
+epoch 1 step 420 loss 9.1770 ppl 9671.72 grad_norm 3.7579 tok/s 10832
+epoch 1 step 430 loss 7.0282 ppl 1128.05 grad_norm 1.7869 tok/s 10827
+epoch 1 step 440 loss 7.1824 ppl 1316.02 grad_norm 2.0618 tok/s 10828
+epoch 1 step 450 loss 7.5479 ppl 1896.69 grad_norm 2.5304 tok/s 10833
+epoch 1 step 460 loss 7.7399 ppl 2298.32 grad_norm 3.0513 tok/s 10828
+epoch 1 step 470 loss 6.6286 ppl 756.39 grad_norm 2.0679 tok/s 10831
+epoch 1 step 480 loss 7.4130 ppl 1657.46 grad_norm 2.3358 tok/s 10830
+epoch 1 step 490 loss 6.9766 ppl 1071.29 grad_norm 1.9951 tok/s 10831
+epoch 1 step 500 loss 7.1169 ppl 1232.57 grad_norm 1.8456 tok/s 10828
