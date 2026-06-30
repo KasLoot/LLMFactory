@@ -23,3 +23,10 @@ for name, tok in [("lfm 2.5 VL", lfm2_5_vl_tok)]:
         print("chars/token:", len(s) / max(len(ids), 1))
         print("roundtrip:", decoded == s)
         print()
+
+
+import json
+tj = json.load(open("tokenizer/LFM2_5_VL/tokenizer.json"))
+print(tj["model"]["type"])   # "BPE" → workable; "Unigram" → tiktoken can't replicate it
+print(tj.get("normalizer"))  # ideally null or something trivial
+print(tj["pre_tokenizer"])   # you'll need to reproduce this split exactly
