@@ -17,7 +17,7 @@ from models.LFM2.model import LFM2, LFM2_5_350M_Config
 
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_CHECKPOINT = "/Users/liuyuxin/workspace/data/models/LFM2.5-350M-Base/best.pt"
+DEFAULT_CHECKPOINT = "~/workspace/data/models/LFM2.5-350M-Base/best.pt"
 DEFAULT_TOKENIZER = ROOT / "tokenizer" / "LFM2_5_VL_tiktoken"
 DEFAULT_STOP_TOKENS = ("<|im_end|>", "<|endoftext|>")
 
