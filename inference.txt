@@ -1,0 +1,8 @@
+uv run python inference.py \
+  --prompt "<|startoftext|>Artificial intelligence is a field of computer science that" \
+  --max-new-tokens 160 \
+  --verbose \
+  --temperature 0.8 \
+  --dtype bf16 \
+  --stream \
+  --checkpoint /data/models/LFM2.5-350M-Base
